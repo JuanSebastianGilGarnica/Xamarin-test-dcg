@@ -1,0 +1,8 @@
+﻿.btnPrincipalBck {
+    background: linear-gradient(180deg, #FCC65E 0%, #FAAF1D 100%);
+}
+
+.btnPrincipalDisableBck {
+    background: linear-gradient(180deg, #7E7D7B 0%, #8A8884 100%);
+}
+

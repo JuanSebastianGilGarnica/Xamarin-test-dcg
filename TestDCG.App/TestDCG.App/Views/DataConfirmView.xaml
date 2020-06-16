@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:txt="clr-namespace:TestDCG.App.Resources"
+             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
+             xmlns:renders="clr-namespace:TestDCG.App.Renders"
+             ControlTemplate="{StaticResource PageWithGradient}"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="TestDCG.App.Views.DataConfirmView">
+    <ContentPage.Resources>
+        <StyleSheet Source="../Resources/Styles.css" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutFlags="All" 
+                         Padding="0"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1">
+
+                <StackLayout Spacing="20" VerticalOptions="Start" HorizontalOptions="FillAndExpand" Margin="35,10" Padding="0,20,0,0">
+
+                    <Label Style="{StaticResource Title}"
+                           Text="{x:Static txt:TxtResource.LabeInfoTitle}"
+                           HorizontalOptions="CenterAndExpand"/>
+                    <Label Style="{StaticResource Info}"
+                           Margin="0,20"
+                           Text="{Binding UserInfoText}"
+                           HorizontalOptions="CenterAndExpand"/>
+
+                </StackLayout>
+                
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Margin="35,5">
+
+                    <Label Margin="0,10,0,30" 
+                           Style="{StaticResource Title}"
+                           HorizontalOptions="Center"
+                           Text="{x:Static txt:TxtResource.LabeIntoInfo}"/>
+
+                    <StackLayout Spacing="0" Padding="0" HorizontalOptions="FillAndExpand">
+                        <Label Style="{StaticResource Info}"
+                               Text="{x:Static txt:TxtResource.LabelDep}"/>
+                        <renders:CustomPickerRender Title="{x:Static txt:TxtResource.PhPiker}"
+                                                    ItemsSource="{Binding Model.Departments}"
+                                                    SelectedItem="{Binding Model.DepartamentSelected, Mode=TwoWay}"
+                                                    ItemDisplayBinding="{Binding Description}"/>
+                    </StackLayout>
+
+                    <StackLayout Spacing="0" Padding="0" HorizontalOptions="FillAndExpand">
+                        <Label Style="{StaticResource Info}"
+                               Text="{x:Static txt:TxtResource.LabelMun}"/>
+                        <renders:CustomPickerRender Title="{x:Static txt:TxtResource.PhPiker}"
+                                                    ItemsSource="{Binding Model.Municipalities}"
+                                                    SelectedItem="{Binding Model.MunicipalitieSelected, Mode=TwoWay}"
+                                                    ItemDisplayBinding="{Binding Description}"/>
+                    </StackLayout>
+
+                    <StackLayout Spacing="0" Padding="0" HorizontalOptions="FillAndExpand">
+                        <renders:CustomEntryRender Text="{Binding Model.Address}"
+                                                   Placeholder="{x:Static txt:TxtResource.PhAddress}"/>
+                    </StackLayout>
+
+                    <Frame Padding="0" 
+                           Margin="0,20,0,15" 
+                           CornerRadius="30" 
+                           HasShadow="True"
+                           BackgroundColor="Transparent">
+                        <AbsoluteLayout>
+                            <magic:GradientView VerticalOptions="FillAndExpand" 
+                                                StyleClass="btnPrincipalBck"
+                                                IsVisible="{Binding CanConfirm}"
+                                                AbsoluteLayout.LayoutFlags="All" 
+                                                AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+                            <Button Text="{x:Static txt:TxtResource.BtnConfirm}"
+                                    AbsoluteLayout.LayoutFlags="All"
+                                    IsEnabled="{Binding CanConfirm}"
+                                    Command="{Binding ConfirmCommand}"
+                                    AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+                        </AbsoluteLayout>
+
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame" Binding="{Binding CanConfirm}" Value="False">
+                                <Setter Property="BackgroundColor" Value="DarkGray"/>
+                            </DataTrigger>
+                        </Frame.Triggers>
+                    </Frame>
+                    
+                </StackLayout>
+
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

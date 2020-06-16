@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:txt="clr-namespace:TestDCG.App.Resources"
+             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
+             xmlns:renders="clr-namespace:TestDCG.App.Renders"
+             x:Class="TestDCG.App.Views.LoginView"
+             ControlTemplate="{StaticResource PageWithGradient}"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <StyleSheet Source="../Resources/Styles.css" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutFlags="All" 
+                         Padding="0"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1">
+
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Margin="35,5">
+
+                    <Label Margin="0,10,0,30" 
+                           Style="{StaticResource Title}"
+                           HorizontalOptions="Center"
+                           Text="{x:Static txt:TxtResource.LabelTitleLogin}"/>
+
+                    <StackLayout Spacing="0" Padding="0" HorizontalOptions="FillAndExpand">
+                        <Label Style="{StaticResource Info}"
+                               Text="{x:Static txt:TxtResource.LabelUser}"/>
+                        <renders:CustomEntryRender Text="{Binding UserName}"/>
+                    </StackLayout>
+
+                    <StackLayout Spacing="0" Padding="0" HorizontalOptions="FillAndExpand">
+                        <Label Style="{StaticResource Info}"
+                               Text="{x:Static txt:TxtResource.LabelPss}"/>
+                        <renders:CustomEntryRender IsPassword="True" Text="{Binding Password}"/>
+                    </StackLayout>
+
+                    <Frame Padding="0" 
+                           Margin="0,20,0,15" 
+                           CornerRadius="30" 
+                           HasShadow="True"
+                           BackgroundColor="Transparent">
+                        <AbsoluteLayout>
+                            <magic:GradientView VerticalOptions="FillAndExpand" 
+                                                StyleClass="btnPrincipalBck"
+                                                IsVisible="{Binding CanLogin}"
+                                                AbsoluteLayout.LayoutFlags="All" 
+                                                AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+                            <Button Text="{x:Static txt:TxtResource.BtnLogin}"
+                                    AbsoluteLayout.LayoutFlags="All"
+                                    IsEnabled="{Binding CanLogin}"
+                                    Command="{Binding LoginCommand}"
+                                    AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+                        </AbsoluteLayout>
+
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame" Binding="{Binding CanLogin}" Value="False">
+                                <Setter Property="BackgroundColor" Value="DarkGray"/>
+                            </DataTrigger>
+                        </Frame.Triggers>
+                    </Frame>
+                </StackLayout>
+
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

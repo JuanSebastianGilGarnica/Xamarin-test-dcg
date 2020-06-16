@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestDCG.App.Views.HomeView"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:txt="clr-namespace:TestDCG.App.Resources"
+             xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
+             ControlTemplate="{StaticResource PageWithGradient}"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <StyleSheet Source="../Resources/Styles.css" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            
+            <StackLayout AbsoluteLayout.LayoutFlags="All" 
+                         AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         Padding="0">
+
+                <Label Margin="0,10,0,30" 
+                           Style="{StaticResource Title}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="CenterAndExpand"
+                           Text="{x:Static txt:TxtResource.LabeWelcome}"/>
+
+                <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" Margin="35,5">
+
+                    <Label Margin="0,10,0,30" 
+                           Style="{StaticResource Title}"
+                           HorizontalOptions="Center"
+                           Text="{x:Static txt:TxtResource.LabeDataInfo}"/>
+
+                    <StackLayout Spacing="0" Padding="0" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                        <Label Style="{StaticResource Info}"
+                               Text="{x:Static txt:TxtResource.LabelUserName}"/>
+                        <Label Style="{StaticResource Info}"
+                               Text="{Binding Model.UserName, StringFormat=': {0}'}"/>
+                    </StackLayout>
+                    
+                    <StackLayout Spacing="0" Padding="0" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                        <Label Style="{StaticResource Info}"
+                               Text="{x:Static txt:TxtResource.LabelDep}"/>
+                        <Label Style="{StaticResource Info}"
+                               Text="{Binding Model.Department.Description, StringFormat=': {0}'}"/>
+                    </StackLayout>
+
+                    <StackLayout Spacing="0" Padding="0" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                        <Label Style="{StaticResource Info}"
+                               Text="{x:Static txt:TxtResource.LabelMun}"/>
+                        <Label Style="{StaticResource Info}"
+                               Text="{Binding Model.Municipalitie.Description, StringFormat=': {0}'}}"/>
+                    </StackLayout>
+
+                    <StackLayout Spacing="0" Padding="0" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                        <Label Style="{StaticResource Info}"
+                               Text="{x:Static txt:TxtResource.LabelAddress}"/>
+                        <Label Style="{StaticResource Info}"
+                               Text="{Binding Model.Address, StringFormat=': {0}'}}"/>
+                    </StackLayout>
+
+                </StackLayout>
+
+            </StackLayout>
+            
+            <Frame Padding="0" 
+                    CornerRadius="30" 
+                    HasShadow="True"
+                    Margin="10,20,10,10"
+                    BackgroundColor="Transparent"
+                    AbsoluteLayout.LayoutFlags="All" 
+                    AbsoluteLayout.LayoutBounds="1,0,0.35,0.1">
+                <AbsoluteLayout>
+                    <magic:GradientView VerticalOptions="FillAndExpand" 
+                                        StyleClass="btnPrincipalBck"
+                                        AbsoluteLayout.LayoutFlags="All" 
+                                        AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+                    <Button Text="{x:Static txt:TxtResource.BtnLogOut}"
+                            AbsoluteLayout.LayoutFlags="All"
+                            Margin="0"
+                            IsEnabled="True"
+                            FontSize="Micro"
+                            Command="{Binding LogOutCommand}"
+                            AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+                </AbsoluteLayout>
+            </Frame>
+        
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
